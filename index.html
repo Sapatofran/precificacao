@@ -91,8 +91,8 @@
             transition: border-color 0.3s;
         }
 
-        /* Destaque para inputs do PE */
-        #vlVendaMedioInput, #margemContribuicaoPercInput {
+        /* Destaque para inputs importantes do PE */
+        .highlight-input input {
             background-color: var(--highlight-input-bg);
             border-color: #f7b731;
         }
@@ -203,16 +203,16 @@
         <div class="card">
             <div class="pe-grid" style="margin-bottom: 20px;">
                 <div class="pe-input-group">
-                    <label for="custoFixoMensal">Custo Fixo Mensal (R$)</label>
-                    <input type="number" id="custoFixoMensal" value="12500" step="0.01" min="0">
+                    <label for="custoFixoMensal">1. Custo Fixo (Ex: Aluguel, Salários - R$)</label>
+                    <input type="number" id="custoFixoMensal" value="10000" step="0.01" min="0">
                 </div>
                 <div class="pe-input-group">
-                    <label for="vlVendaMedioInput">Ticket Médio (Valor de Venda Médio - R$)</label>
-                    <input type="number" id="vlVendaMedioInput" value="105.17" step="0.01" min="0">
+                    <label for="despesasOp">2. Despesas Operacionais (R$)</label>
+                    <input type="number" id="despesasOp" value="2000" step="0.01" min="0">
                 </div>
-                 <div class="pe-input-group">
-                    <label for="margemContribuicaoPercInput">Margem de Contribuição Média (%)</label>
-                    <input type="number" id="margemContribuicaoPercInput" value="19.18" step="0.01" min="0">
+                <div class="pe-input-group">
+                    <label for="despesasNaoOp">3. Despesas Não Operacionais (R$)</label>
+                    <input type="number" id="despesasNaoOp" value="500" step="0.01" min="0">
                 </div>
                 <div class="pe-result-box" style="background-color: #e8f4fd;">
                     <strong>Custo Fixo Total (CFT)</strong>
@@ -221,6 +221,26 @@
             </div>
 
             <div class="pe-grid">
+                <div class="pe-input-group highlight-input">
+                    <label for="vlVendaMedioInput">Ticket Médio (Valor de Venda Médio - R$)</label>
+                    <input type="number" id="vlVendaMedioInput" value="105.17" step="0.01" min="0">
+                </div>
+                 <div class="pe-input-group highlight-input">
+                    <label for="margemContribuicaoPercInput">Margem de Contribuição Média (%)</label>
+                    <input type="number" id="margemContribuicaoPercInput" value="19.18" step="0.01" min="0">
+                </div>
+                
+                <div class="pe-result-box">
+                    <strong>Margem de Contribuição (R$)</strong>
+                    <span id="mcu" class="pe-result-value">R$ 0,00</span>
+                </div>
+                 <div class="pe-result-box" style="background-color: #d4ede2; border-color: var(--success-color);">
+                    <strong>Custo Variável Médio (R$)</strong>
+                    <span id="custoVariavelMedio" class="pe-result-value" style="color: var(--success-color);">R$ 0,00</span>
+                </div>
+            </div>
+
+            <div class="pe-grid" style="margin-top: 30px;">
                 <div class="pe-result-box">
                     <strong>PE em Unidades (un.)</strong>
                     <span id="peUnidades" class="pe-result-value">0</span>
@@ -229,17 +249,8 @@
                     <strong>PE em Faturamento (R$)</strong>
                     <span id="peFaturamento" class="pe-result-value">R$ 0,00</span>
                 </div>
-                <div class="pe-result-box" style="background-color: #d4ede2; border-color: var(--success-color);">
-                    <strong>Custo Variável Médio (R$)</strong>
-                    <span id="custoVariavelMedio" class="pe-result-value" style="color: var(--success-color);">R$ 0,00</span>
-                </div>
-                <div class="pe-result-box">
-                    <strong>Margem de Contribuição (R$)</strong>
-                    <span id="mcu" class="pe-result-value">R$ 0,00</span>
-                </div>
             </div>
-             <p style="margin-top: 20px; font-size: 0.9em; color: var(--secondary-color);">*A Margem de Contribuição Média (%) e o Ticket Médio (R$) são editáveis para usar dados de base da sua operação.</p>
-
+            <p style="margin-top: 20px; font-size: 0.9em; color: var(--secondary-color);">*Os campos 'Ticket Médio' e 'Margem de Contribuição Média (%)' são editáveis para que você use os dados de base da sua operação.</p>
         </div>
 
         <h2 id="pricing-section">Detalhamento de Margem Unitária por Canal</h2>
@@ -286,12 +297,6 @@
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
         });
-        
-        // Formato para input de porcentagem
-        const inputPercFormatter = new Intl.NumberFormat('pt-BR', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        });
 
         // Dados iniciais (extraídos da planilha do usuário)
         let marketplaceData = [
@@ -303,9 +308,11 @@
             { id: 'shopee', name: 'SHOPEE', vlVenda: 31.00, custoProduto: 40.00, frete: 0.00, taxaMkt: 0.20, imposto: 0.00, promocao: 0.00 }
         ];
 
-        // Mapeia os inputs de custo fixo E OS NOVOS INPUTS
+        // Mapeia os inputs de custo fixo E os inputs de base
         const peInputs = {
             custoFixoMensal: document.getElementById('custoFixoMensal'),
+            despesasOp: document.getElementById('despesasOp'),
+            despesasNaoOp: document.getElementById('despesasNaoOp'),
             vlVendaMedioInput: document.getElementById('vlVendaMedioInput'),
             margemContribuicaoPercInput: document.getElementById('margemContribuicaoPercInput'),
         };
@@ -338,18 +345,17 @@
 
         // 2. Calcula o Ponto de Equilíbrio (PE)
         function calculatePE() {
-            // Inputs:
+            // 1. Custo Fixo Total (CFT)
             const custoFixoMensal = parseFloat(peInputs.custoFixoMensal.value) || 0;
+            const despesasOp = parseFloat(peInputs.despesasOp.value) || 0;
+            const despesasNaoOp = parseFloat(peInputs.despesasNaoOp.value) || 0;
+            const cft = custoFixoMensal + despesasOp + despesasNaoOp;
+
+            // 2. Inputs de Base
             const vlVendaMedio = parseFloat(peInputs.vlVendaMedioInput.value) || 0;
             const margemContribuicaoPercInput = parseFloat(peInputs.margemContribuicaoPercInput.value) || 0;
             
-            // 1. Custo Fixo Total (CFT)
-            // Mantive a lógica simples do custo fixo da última resposta, consolidando os 3 inputs de custo fixo no 'custoFixoMensal' para simplificar o novo layout.
-            // Para manter a coerência com a v2:
-            const cft = custoFixoMensal; // Agora o custo fixo mensal é o valor total de custos fixos.
-
-            // 2. Margem de Contribuição
-            // Margem de Contribuição % é um input (deve ser convertido para decimal)
+            // Margem de Contribuição % (convertida de percentual para decimal)
             const margemContribuicaoPerc = (margemContribuicaoPercInput / 100) || 0;
             
             // Margem de Contribuição R$
@@ -365,10 +371,10 @@
 
             // Exibe os resultados do PE
             document.getElementById('cft').textContent = formatter.format(cft);
+            document.getElementById('mcu').textContent = formatter.format(mcu);
+            document.getElementById('custoVariavelMedio').textContent = formatter.format(custoVariavelMedio);
             document.getElementById('peUnidades').textContent = Math.ceil(peUnidades); 
             document.getElementById('peFaturamento').textContent = formatter.format(peFaturamento);
-            document.getElementById('custoVariavelMedio').textContent = formatter.format(custoVariavelMedio);
-            document.getElementById('mcu').textContent = formatter.format(mcu);
         }
 
         // 3. Atualiza a interface completa
@@ -407,3 +413,62 @@
                     <td class="result-cell">${percFormatter.format(data.taxasVariaveisPerc)}</td>
                     <td class="result-cell">${formatter.format(data.custoFixoUnitario)}</td>
                     <td class="result-cell">${formatter.format(data.custoTotalUnitario)}</td>
+                    <td class="result-cell ${data.lucroLiquido < 0 ? 'negative' : ''}">${formatter.format(data.lucroLiquido)}</td>
+                    <td class="result-cell ${data.margemLiquida < 0 ? 'negative' : ''}">${percFormatter.format(data.margemLiquida)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            attachInputListeners(); 
+        }
+
+        function createInputCell(id, key, value, isPercentage = false) {
+            const displayedValue = isPercentage ? (value * 100).toFixed(2) : value.toFixed(2);
+            return `
+                <td class="input-cell">
+                    <input 
+                        type="number" 
+                        data-id="${id}" 
+                        data-key="${key}" 
+                        value="${displayedValue}" 
+                        step="0.01"
+                        min="0"
+                    >
+                </td>
+            `;
+        }
+        
+        function attachInputListeners() {
+            // A. Listeners da Tabela de Precificação
+            document.querySelectorAll('#pricingTable input').forEach(input => {
+                input.oninput = (e) => {
+                    const id = e.target.dataset.id;
+                    const key = e.target.dataset.key;
+                    let newValue = parseFloat(e.target.value) || 0;
+
+                    // Converte de volta para decimal se for porcentagem
+                    if (key.includes('taxaMkt') || key.includes('imposto') || key.includes('promocao')) {
+                        newValue = newValue / 100;
+                    }
+
+                    // Encontra e atualiza o dado
+                    const item = marketplaceData.find(m => m.id === id);
+                    if (item) {
+                        item[key] = newValue;
+                        updateAllCalculations();
+                    }
+                };
+            });
+
+            // B. Listeners dos Inputs de Ponto de Equilíbrio
+            Object.values(peInputs).forEach(input => {
+                input.oninput = updateAllCalculations;
+            });
+        }
+
+        // Inicia a aplicação
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAllCalculations();
+        });
+    </script>
+</body>
+</html>
