@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,23 @@
     <style>
         /* Variáveis de Cor Otimizadas */
         :root {
-            --primary-color: #0056b3; /* Azul escuro principal */
+            --primary-color: #0056b3;
+            /* Azul escuro principal */
             --secondary-color: #6c757d;
-            --success-color: #1a7e4b; /* Verde escuro para lucro */
-            --danger-color: #c9302c; /* Vermelho vibrante para prejuízo */
-            --background-color: #f4f7f6; /* Fundo geral muito leve */
+            --success-color: #1a7e4b;
+            /* Verde escuro para lucro */
+            --danger-color: #c9302c;
+            /* Vermelho vibrante para prejuízo */
+            --background-color: #f4f7f6;
+            /* Fundo geral muito leve */
             --card-background: #ffffff;
             --input-bg: #ffffff;
-            --header-bg: #34495e; /* Header de tabela escuro e elegante */
+            --header-bg: #34495e;
+            /* Header de tabela escuro e elegante */
             --header-text: #ffffff;
             --input-border: #ced4da;
-            --highlight-input-bg: #fffbe6; /* Fundo para campos editáveis do PE */
+            --highlight-input-bg: #fffbe6;
+            /* Fundo para campos editáveis do PE */
         }
 
         body {
@@ -123,8 +130,9 @@
             font-weight: 700;
             color: var(--success-color);
         }
-        
-        #peUnidades, #peFaturamento {
+
+        #peUnidades,
+        #peFaturamento {
             color: var(--primary-color);
         }
 
@@ -132,12 +140,12 @@
         .pricing-table-container {
             overflow-x: auto;
         }
-        
+
         table {
             width: 100%;
-            border-collapse: separate; 
+            border-collapse: separate;
             border-spacing: 0;
-            min-width: 1200px; 
+            min-width: 1200px;
         }
 
         thead th {
@@ -150,10 +158,18 @@
             font-weight: 600;
             border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        thead th:nth-child(n+2):nth-child(-n+7) { background-color: #1abc9c; } 
-        thead th:nth-child(n+8):nth-child(-n+9) { background-color: #f39c12; } 
-        thead th:nth-child(n+10) { background-color: var(--primary-color); } 
+
+        thead th:nth-child(n+2):nth-child(-n+7) {
+            background-color: #1abc9c;
+        }
+
+        thead th:nth-child(n+8):nth-child(-n+9) {
+            background-color: #f39c12;
+        }
+
+        thead th:nth-child(n+10) {
+            background-color: var(--primary-color);
+        }
 
         tbody td {
             padding: 10px 8px;
@@ -180,10 +196,11 @@
 
         .result-cell {
             font-weight: 600;
-            background-color: #f7f9fb; 
+            background-color: #f7f9fb;
         }
 
-        td:nth-child(10), td:nth-child(11) {
+        td:nth-child(10),
+        td:nth-child(11) {
             font-size: 1em;
             font-weight: 700;
             color: var(--success-color);
@@ -191,10 +208,11 @@
 
         .result-cell.negative {
             color: var(--danger-color) !important;
-            background-color: #fce7e7; 
+            background-color: #fce7e7;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>📈 Ferramenta de Precificação Inteligente</h1>
@@ -225,18 +243,19 @@
                     <label for="vlVendaMedioInput">Ticket Médio (Valor de Venda Médio - R$)</label>
                     <input type="number" id="vlVendaMedioInput" value="105.17" step="0.01" min="0">
                 </div>
-                 <div class="pe-input-group highlight-input">
+                <div class="pe-input-group highlight-input">
                     <label for="margemContribuicaoPercInput">Margem de Contribuição Média (%)</label>
                     <input type="number" id="margemContribuicaoPercInput" value="19.18" step="0.01" min="0">
                 </div>
-                
+
                 <div class="pe-result-box">
                     <strong>Margem de Contribuição (R$)</strong>
                     <span id="mcu" class="pe-result-value">R$ 0,00</span>
                 </div>
-                 <div class="pe-result-box" style="background-color: #d4ede2; border-color: var(--success-color);">
+                <div class="pe-result-box" style="background-color: #d4ede2; border-color: var(--success-color);">
                     <strong>Custo Variável Médio (R$)</strong>
-                    <span id="custoVariavelMedio" class="pe-result-value" style="color: var(--success-color);">R$ 0,00</span>
+                    <span id="custoVariavelMedio" class="pe-result-value" style="color: var(--success-color);">R$
+                        0,00</span>
                 </div>
             </div>
 
@@ -250,7 +269,8 @@
                     <span id="peFaturamento" class="pe-result-value">R$ 0,00</span>
                 </div>
             </div>
-            <p style="margin-top: 20px; font-size: 0.9em; color: var(--secondary-color);">*Os campos 'Ticket Médio' e 'Margem de Contribuição Média (%)' são editáveis para que você use os dados de base da sua operação.</p>
+            <p style="margin-top: 20px; font-size: 0.9em; color: var(--secondary-color);">*Os campos 'Ticket Médio' e
+                'Margem de Contribuição Média (%)' são editáveis para que você use os dados de base da sua operação.</p>
         </div>
 
         <h2 id="pricing-section">Detalhamento de Margem Unitária por Canal</h2>
@@ -278,7 +298,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </div>
@@ -354,13 +374,13 @@
             // 2. Inputs de Base
             const vlVendaMedio = parseFloat(peInputs.vlVendaMedioInput.value) || 0;
             const margemContribuicaoPercInput = parseFloat(peInputs.margemContribuicaoPercInput.value) || 0;
-            
+
             // Margem de Contribuição % (convertida de percentual para decimal)
             const margemContribuicaoPerc = (margemContribuicaoPercInput / 100) || 0;
-            
+
             // Margem de Contribuição R$
             const mcu = vlVendaMedio * margemContribuicaoPerc;
-            
+
             // Custo Variável Médio
             const custoVariavelMedio = vlVendaMedio - mcu;
 
@@ -373,12 +393,22 @@
             document.getElementById('cft').textContent = formatter.format(cft);
             document.getElementById('mcu').textContent = formatter.format(mcu);
             document.getElementById('custoVariavelMedio').textContent = formatter.format(custoVariavelMedio);
-            document.getElementById('peUnidades').textContent = Math.ceil(peUnidades); 
+            document.getElementById('peUnidades').textContent = Math.ceil(peUnidades);
             document.getElementById('peFaturamento').textContent = formatter.format(peFaturamento);
         }
 
         // 3. Atualiza a interface completa
+        // ...existing code...
         function updateAllCalculations() {
+            // Salva o input ativo antes de atualizar
+            const activeElement = document.activeElement;
+            let focusedId = null, focusedKey = null, cursorPos = null;
+            if (activeElement && activeElement.tagName === 'INPUT' && activeElement.dataset.id && activeElement.dataset.key) {
+                focusedId = activeElement.dataset.id;
+                focusedKey = activeElement.dataset.key;
+                cursorPos = activeElement.selectionStart;
+            }
+
             // I. Atualiza os resultados da precificação
             const results = marketplaceData.map(data => {
                 const calculated = calculatePricing(data);
@@ -389,15 +419,27 @@
             // II. Renderiza a tabela de precificação
             renderPricingTable();
 
+            // Restaura o foco e posição do cursor
+            if (focusedId && focusedKey) {
+                const newInput = document.querySelector(`input[data-id="${focusedId}"][data-key="${focusedKey}"]`);
+                if (newInput) {
+                    newInput.focus();
+                    if (cursorPos !== null) {
+                        newInput.setSelectionRange(cursorPos, cursorPos);
+                    }
+                }
+            }
+
             // III. Atualiza os resultados do PE (agora baseado em inputs)
             calculatePE();
         }
-        
+        // ...existing code...
+
         // --- GERAÇÃO DA INTERFACE ---
 
         function renderPricingTable() {
             const tbody = document.getElementById('pricingTable').querySelector('tbody');
-            tbody.innerHTML = ''; 
+            tbody.innerHTML = '';
 
             marketplaceData.forEach((data, index) => {
                 const tr = document.createElement('tr');
@@ -418,7 +460,7 @@
                 `;
                 tbody.appendChild(tr);
             });
-            attachInputListeners(); 
+            attachInputListeners();
         }
 
         function createInputCell(id, key, value, isPercentage = false) {
@@ -436,7 +478,7 @@
                 </td>
             `;
         }
-        
+
         function attachInputListeners() {
             // A. Listeners da Tabela de Precificação
             document.querySelectorAll('#pricingTable input').forEach(input => {
@@ -471,4 +513,5 @@
         });
     </script>
 </body>
+
 </html>
