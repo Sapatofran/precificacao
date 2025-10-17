@@ -6,25 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SapatoFran Precificação</title>
     <style>
-        /* Variáveis de Cor Otimizadas */
         :root {
             --primary-color: #0056b3;
-            /* Azul escuro principal */
             --secondary-color: #6c757d;
             --success-color: #1a7e4b;
-            /* Verde escuro para lucro */
             --danger-color: #c9302c;
-            /* Vermelho vibrante para prejuízo */
             --background-color: #f4f7f6;
-            /* Fundo geral muito leve */
             --card-background: #ffffff;
             --input-bg: #ffffff;
             --header-bg: #34495e;
-            /* Header de tabela escuro e elegante */
             --header-text: #ffffff;
             --input-border: #ced4da;
             --highlight-input-bg: #fffbe6;
-            /* Fundo para campos editáveis do PE */
         }
 
         body {
@@ -65,7 +58,6 @@
             margin-bottom: 30px;
         }
 
-        /* --- Estilos do Ponto de Equilíbrio (PE) --- */
         .pe-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -98,7 +90,6 @@
             transition: border-color 0.3s;
         }
 
-        /* Destaque para inputs importantes do PE */
         .highlight-input input {
             background-color: var(--highlight-input-bg);
             border-color: #f7b731;
@@ -136,7 +127,6 @@
             color: var(--primary-color);
         }
 
-        /* --- Estilos da Tabela de Precificação --- */
         .pricing-table-container {
             overflow-x: auto;
         }
@@ -252,10 +242,9 @@
                     <strong>Margem de Contribuição (R$)</strong>
                     <span id="mcu" class="pe-result-value">R$ 0,00</span>
                 </div>
-                <div class="pe-result-box" style="background-color: #d4ede2; border-color: var(--success-color);">
+                <div class="pe-result-box" style="background-color: #d4ede2;">
                     <strong>Custo Variável Médio (R$)</strong>
-                    <span id="custoVariavelMedio" class="pe-result-value" style="color: var(--success-color);">R$
-                        0,00</span>
+                    <span id="custoVariavelMedio" class="pe-result-value" style="color: var(--success-color);">R$ 0,00</span>
                 </div>
             </div>
 
@@ -269,8 +258,6 @@
                     <span id="peFaturamento" class="pe-result-value">R$ 0,00</span>
                 </div>
             </div>
-            <p style="margin-top: 20px; font-size: 0.9em; color: var(--secondary-color);">*Os campos 'Ticket Médio' e
-                'Margem de Contribuição Média (%)' são editáveis para que você use os dados de base da sua operação.</p>
         </div>
 
         <h2 id="pricing-section">Detalhamento de Margem Unitária por Canal</h2>
@@ -279,9 +266,9 @@
                 <thead>
                     <tr>
                         <th rowspan="2">Marketplace</th>
-                        <th colspan="6">INPUTS (Dados Variáveis da Operação)</th>
+                        <th colspan="6">INPUTS</th>
                         <th colspan="2">CÁLCULOS</th>
-                        <th colspan="3">PONTO DE EQUILÍBRIO UNITÁRIO</th>
+                        <th colspan="3">P.E. UNITÁRIO</th>
                     </tr>
                     <tr>
                         <th>Valor de Venda (R$)</th>
@@ -291,227 +278,157 @@
                         <th>Imposto (%)</th>
                         <th>Promoção (%)</th>
                         <th>Taxas Var. (%)</th>
-                        <th>Custo Fixo Unitário (R$)</th>
-                        <th>Custo Total Unitário (R$)</th>
-                        <th>Lucro Líquido (R$)</th>
-                        <th>Margem Líquida (%)</th>
+                        <th>Custo Fixo Unit.</th>
+                        <th>Custo Total Unit.</th>
+                        <th>Lucro Líq.</th>
+                        <th>Margem Líq. (%)</th>
                     </tr>
                 </thead>
-                <tbody>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
 
     <script>
-        // Formato para moeda brasileira
-        const formatter = new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-            minimumFractionDigits: 2,
-        });
+    const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
+    const percFormatter = new Intl.NumberFormat('pt-BR', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-        // Formato para porcentagem
-        const percFormatter = new Intl.NumberFormat('pt-BR', {
-            style: 'percent',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        });
+    let marketplaceData = [
+        { id: 'netshoes', name: 'NETSHOES', vlVenda: 130.00, custoProduto: 60.00, frete: 0.00, taxaMkt: 0.25, imposto: 0.10, promocao: 0.10 },
+        { id: 'magalu', name: 'MAGALU', vlVenda: 160.00, custoProduto: 69.00, frete: 0.00, taxaMkt: 0.20, imposto: 0.10, promocao: 0.15 },
+        { id: 'meli', name: 'MELI', vlVenda: 78.00, custoProduto: 42.00, frete: 0.00, taxaMkt: 0.14, imposto: 0.05, promocao: 0.00 },
+        { id: 'meli_fg', name: 'MELI FRETE GRÁTIS', vlVenda: 112.00, custoProduto: 50.00, frete: 22.50, taxaMkt: 0.14, imposto: 0.05, promocao: 0.00 },
+        { id: 'shein', name: 'SHEIN', vlVenda: 58.00, custoProduto: 40.00, frete: 0.00, taxaMkt: 0.16, imposto: 0.05, promocao: 0.00 },
+        { id: 'shopee', name: 'SHOPEE', vlVenda: 31.00, custoProduto: 40.00, frete: 0.00, taxaMkt: 0.20, imposto: 0.00, promocao: 0.00 }
+    ];
 
-        // Dados iniciais (extraídos da planilha do usuário)
-        let marketplaceData = [
-            { id: 'netshoes', name: 'NETSHOES', vlVenda: 130.00, custoProduto: 60.00, frete: 0.00, taxaMkt: 0.25, imposto: 0.10, promocao: 0.10 },
-            { id: 'magalu', name: 'MAGALU', vlVenda: 160.00, custoProduto: 69.00, frete: 0.00, taxaMkt: 0.20, imposto: 0.10, promocao: 0.15 },
-            { id: 'meli', name: 'MELI', vlVenda: 78.00, custoProduto: 42.00, frete: 0.00, taxaMkt: 0.14, imposto: 0.05, promocao: 0.00 },
-            { id: 'meli_fg', name: 'MELI FRETE GRÁTIS', vlVenda: 112.00, custoProduto: 50.00, frete: 22.50, taxaMkt: 0.14, imposto: 0.05, promocao: 0.00 },
-            { id: 'shein', name: 'SHEIN', vlVenda: 58.00, custoProduto: 40.00, frete: 0.00, taxaMkt: 0.16, imposto: 0.05, promocao: 0.00 },
-            { id: 'shopee', name: 'SHOPEE', vlVenda: 31.00, custoProduto: 40.00, frete: 0.00, taxaMkt: 0.20, imposto: 0.00, promocao: 0.00 }
-        ];
+    const peInputs = {
+        custoFixoMensal: document.getElementById('custoFixoMensal'),
+        despesasOp: document.getElementById('despesasOp'),
+        despesasNaoOp: document.getElementById('despesasNaoOp'),
+        vlVendaMedioInput: document.getElementById('vlVendaMedioInput'),
+        margemContribuicaoPercInput: document.getElementById('margemContribuicaoPercInput'),
+    };
 
-        // Mapeia os inputs de custo fixo E os inputs de base
-        const peInputs = {
-            custoFixoMensal: document.getElementById('custoFixoMensal'),
-            despesasOp: document.getElementById('despesasOp'),
-            despesasNaoOp: document.getElementById('despesasNaoOp'),
-            vlVendaMedioInput: document.getElementById('vlVendaMedioInput'),
-            margemContribuicaoPercInput: document.getElementById('margemContribuicaoPercInput'),
-        };
+    function calculatePricing(data) {
+        const { vlVenda, custoProduto, frete, taxaMkt, imposto, promocao } = data;
+        const taxasVariaveisPerc = taxaMkt + imposto + promocao;
+        const custoFixoUnitario = vlVenda * taxasVariaveisPerc;
+        const custoTotalUnitario = custoProduto + frete + custoFixoUnitario;
+        const lucroLiquido = vlVenda - custoTotalUnitario;
+        const margemLiquida = vlVenda > 0 ? lucroLiquido / vlVenda : 0;
+        return { taxasVariaveisPerc, custoFixoUnitario, custoTotalUnitario, lucroLiquido, margemLiquida };
+    }
 
-        // --- FUNÇÕES DE CÁLCULO ---
+    function calculatePE() {
+        const cft = (parseFloat(peInputs.custoFixoMensal.value) || 0)
+            + (parseFloat(peInputs.despesasOp.value) || 0)
+            + (parseFloat(peInputs.despesasNaoOp.value) || 0);
 
-        // 1. Calcula a margem unitária para um marketplace
-        function calculatePricing(data) {
-            const vlVenda = data.vlVenda || 0;
-            const custoProduto = data.custoProduto || 0;
-            const frete = data.frete || 0;
-            const taxaMkt = data.taxaMkt || 0;
-            const imposto = data.imposto || 0;
-            const promocao = data.promocao || 0;
+        const vlVendaMedio = parseFloat(peInputs.vlVendaMedioInput.value) || 0;
+        const margemContribuicaoPerc = (parseFloat(peInputs.margemContribuicaoPercInput.value) || 0) / 100;
+        const mcu = vlVendaMedio * margemContribuicaoPerc;
+        const custoVariavelMedio = vlVendaMedio - mcu;
+        const peUnidades = mcu > 0 ? cft / mcu : 0;
+        const peFaturamento = margemContribuicaoPerc > 0 ? cft / margemContribuicaoPerc : 0;
 
-            const taxasVariaveisPerc = taxaMkt + imposto + promocao;
-            const custoFixoUnitario = vlVenda * taxasVariaveisPerc;
-            const custoTotalUnitario = custoProduto + frete + custoFixoUnitario;
-            const lucroLiquido = vlVenda - custoTotalUnitario;
-            const margemLiquida = vlVenda > 0 ? lucroLiquido / vlVenda : 0;
+        document.getElementById('cft').textContent = formatter.format(cft);
+        document.getElementById('mcu').textContent = formatter.format(mcu);
+        document.getElementById('custoVariavelMedio').textContent = formatter.format(custoVariavelMedio);
+        document.getElementById('peUnidades').textContent = Math.ceil(peUnidades);
+        document.getElementById('peFaturamento').textContent = formatter.format(peFaturamento);
+    }
 
-            return {
-                taxasVariaveisPerc,
-                custoFixoUnitario,
-                custoTotalUnitario,
-                lucroLiquido,
-                margemLiquida
-            };
-        }
+    function renderPricingTable() {
+        const tbody = document.getElementById('pricingTable').querySelector('tbody');
+        tbody.innerHTML = '';
 
-        // 2. Calcula o Ponto de Equilíbrio (PE)
-        function calculatePE() {
-            // 1. Custo Fixo Total (CFT)
-            const custoFixoMensal = parseFloat(peInputs.custoFixoMensal.value) || 0;
-            const despesasOp = parseFloat(peInputs.despesasOp.value) || 0;
-            const despesasNaoOp = parseFloat(peInputs.despesasNaoOp.value) || 0;
-            const cft = custoFixoMensal + despesasOp + despesasNaoOp;
+        marketplaceData.forEach(data => {
+            const calc = calculatePricing(data);
+            Object.assign(data, calc);
 
-            // 2. Inputs de Base
-            const vlVendaMedio = parseFloat(peInputs.vlVendaMedioInput.value) || 0;
-            const margemContribuicaoPercInput = parseFloat(peInputs.margemContribuicaoPercInput.value) || 0;
-
-            // Margem de Contribuição % (convertida de percentual para decimal)
-            const margemContribuicaoPerc = (margemContribuicaoPercInput / 100) || 0;
-
-            // Margem de Contribuição R$
-            const mcu = vlVendaMedio * margemContribuicaoPerc;
-
-            // Custo Variável Médio
-            const custoVariavelMedio = vlVendaMedio - mcu;
-
-
-            // 3. Ponto de Equilíbrio
-            const peUnidades = mcu > 0 ? cft / mcu : 0;
-            const peFaturamento = margemContribuicaoPerc > 0 ? cft / margemContribuicaoPerc : 0;
-
-            // Exibe os resultados do PE
-            document.getElementById('cft').textContent = formatter.format(cft);
-            document.getElementById('mcu').textContent = formatter.format(mcu);
-            document.getElementById('custoVariavelMedio').textContent = formatter.format(custoVariavelMedio);
-            document.getElementById('peUnidades').textContent = Math.ceil(peUnidades);
-            document.getElementById('peFaturamento').textContent = formatter.format(peFaturamento);
-        }
-
-        // 3. Atualiza a interface completa
-        // ...existing code...
-        function updateAllCalculations() {
-            // Salva o input ativo antes de atualizar
-            const activeElement = document.activeElement;
-            let focusedId = null, focusedKey = null, cursorPos = null;
-            if (activeElement && activeElement.tagName === 'INPUT' && activeElement.dataset.id && activeElement.dataset.key) {
-                focusedId = activeElement.dataset.id;
-                focusedKey = activeElement.dataset.key;
-                cursorPos = activeElement.selectionStart;
-            }
-
-            // I. Atualiza os resultados da precificação
-            const results = marketplaceData.map(data => {
-                const calculated = calculatePricing(data);
-                return { ...data, ...calculated };
-            });
-            marketplaceData = results;
-
-            // II. Renderiza a tabela de precificação
-            renderPricingTable();
-
-            // Restaura o foco e posição do cursor
-            if (focusedId && focusedKey) {
-                const newInput = document.querySelector(`input[data-id="${focusedId}"][data-key="${focusedKey}"]`);
-                if (newInput) {
-                    newInput.focus();
-                    if (cursorPos !== null) {
-                        newInput.setSelectionRange(cursorPos, cursorPos);
-                    }
-                }
-            }
-
-            // III. Atualiza os resultados do PE (agora baseado em inputs)
-            calculatePE();
-        }
-        // ...existing code...
-
-        // --- GERAÇÃO DA INTERFACE ---
-
-        function renderPricingTable() {
-            const tbody = document.getElementById('pricingTable').querySelector('tbody');
-            tbody.innerHTML = '';
-
-            marketplaceData.forEach((data, index) => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td style="font-weight: 600; text-align: left; padding-left: 15px;">${data.name}</td>
-                    ${createInputCell(data.id, 'vlVenda', data.vlVenda)}
-                    ${createInputCell(data.id, 'custoProduto', data.custoProduto)}
-                    ${createInputCell(data.id, 'frete', data.frete)}
-                    ${createInputCell(data.id, 'taxaMkt', data.taxaMkt, true)}
-                    ${createInputCell(data.id, 'imposto', data.imposto, true)}
-                    ${createInputCell(data.id, 'promocao', data.promocao, true)}
-                    
-                    <td class="result-cell">${percFormatter.format(data.taxasVariaveisPerc)}</td>
-                    <td class="result-cell">${formatter.format(data.custoFixoUnitario)}</td>
-                    <td class="result-cell">${formatter.format(data.custoTotalUnitario)}</td>
-                    <td class="result-cell ${data.lucroLiquido < 0 ? 'negative' : ''}">${formatter.format(data.lucroLiquido)}</td>
-                    <td class="result-cell ${data.margemLiquida < 0 ? 'negative' : ''}">${percFormatter.format(data.margemLiquida)}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-            attachInputListeners();
-        }
-
-        function createInputCell(id, key, value, isPercentage = false) {
-            const displayedValue = isPercentage ? (value * 100).toFixed(2) : value.toFixed(2);
-            return `
-                <td class="input-cell">
-                    <input 
-                        type="number" 
-                        data-id="${id}" 
-                        data-key="${key}" 
-                        value="${displayedValue}" 
-                        step="0.01"
-                        min="0"
-                    >
-                </td>
+            const tr = document.createElement('tr');
+            tr.setAttribute('data-id', data.id);
+            tr.innerHTML = `
+                <td style="font-weight: 600; text-align: left; padding-left: 15px;">${data.name}</td>
+                ${createInputCell(data.id, 'vlVenda', data.vlVenda)}
+                ${createInputCell(data.id, 'custoProduto', data.custoProduto)}
+                ${createInputCell(data.id, 'frete', data.frete)}
+                ${createInputCell(data.id, 'taxaMkt', data.taxaMkt, true)}
+                ${createInputCell(data.id, 'imposto', data.imposto, true)}
+                ${createInputCell(data.id, 'promocao', data.promocao, true)}
+                <td class="result-cell taxas">${percFormatter.format(data.taxasVariaveisPerc)}</td>
+                <td class="result-cell cf">${formatter.format(data.custoFixoUnitario)}</td>
+                <td class="result-cell ct">${formatter.format(data.custoTotalUnitario)}</td>
+                <td class="result-cell lucro ${data.lucroLiquido < 0 ? 'negative' : ''}">${formatter.format(data.lucroLiquido)}</td>
+                <td class="result-cell margem ${data.margemLiquida < 0 ? 'negative' : ''}">${percFormatter.format(data.margemLiquida)}</td>
             `;
-        }
-
-        function attachInputListeners() {
-            // A. Listeners da Tabela de Precificação
-            document.querySelectorAll('#pricingTable input').forEach(input => {
-                input.oninput = (e) => {
-                    const id = e.target.dataset.id;
-                    const key = e.target.dataset.key;
-                    let newValue = parseFloat(e.target.value) || 0;
-
-                    // Converte de volta para decimal se for porcentagem
-                    if (key.includes('taxaMkt') || key.includes('imposto') || key.includes('promocao')) {
-                        newValue = newValue / 100;
-                    }
-
-                    // Encontra e atualiza o dado
-                    const item = marketplaceData.find(m => m.id === id);
-                    if (item) {
-                        item[key] = newValue;
-                        updateAllCalculations();
-                    }
-                };
-            });
-
-            // B. Listeners dos Inputs de Ponto de Equilíbrio
-            Object.values(peInputs).forEach(input => {
-                input.oninput = updateAllCalculations;
-            });
-        }
-
-        // Inicia a aplicação
-        document.addEventListener('DOMContentLoaded', () => {
-            updateAllCalculations();
+            tbody.appendChild(tr);
         });
-    </script>
-</body>
 
+        attachInputListeners();
+    }
+
+    function createInputCell(id, key, value, isPercentage = false) {
+        const displayedValue = isPercentage ? (value * 100).toFixed(2) : value.toFixed(2);
+        return `
+            <td class="input-cell">
+                <input 
+                    type="number" 
+                    data-id="${id}" 
+                    data-key="${key}" 
+                    value="${displayedValue}" 
+                    step="0.01"
+                    min="0"
+                >
+            </td>
+        `;
+    }
+
+    function attachInputListeners() {
+        document.querySelectorAll('#pricingTable input').forEach(input => {
+            input.addEventListener('input', (e) => {
+                const id = e.target.dataset.id;
+                const key = e.target.dataset.key;
+                let newValue = parseFloat(e.target.value) || 0;
+
+                if (key.includes('taxaMkt') || key.includes('imposto') || key.includes('promocao'))
+                    newValue = newValue / 100;
+
+                const item = marketplaceData.find(m => m.id === id);
+                if (item) {
+                    item[key] = newValue;
+                    const calc = calculatePricing(item);
+                    Object.assign(item, calc);
+
+                    // Atualiza só as células da linha
+                    const row = document.querySelector(`tr[data-id="${id}"]`);
+                    if (row) {
+                        row.querySelector('.taxas').textContent = percFormatter.format(calc.taxasVariaveisPerc);
+                        row.querySelector('.cf').textContent = formatter.format(calc.custoFixoUnitario);
+                        row.querySelector('.ct').textContent = formatter.format(calc.custoTotalUnitario);
+                        const lucroCell = row.querySelector('.lucro');
+                        const margemCell = row.querySelector('.margem');
+
+                        lucroCell.textContent = formatter.format(calc.lucroLiquido);
+                        margemCell.textContent = percFormatter.format(calc.margemLiquida);
+
+                        lucroCell.classList.toggle('negative', calc.lucroLiquido < 0);
+                        margemCell.classList.toggle('negative', calc.margemLiquida < 0);
+                    }
+                    calculatePE();
+                }
+            });
+        });
+
+        Object.values(peInputs).forEach(input => input.addEventListener('input', calculatePE));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderPricingTable();
+        calculatePE();
+    });
+</script>
+
+</body>
 </html>
