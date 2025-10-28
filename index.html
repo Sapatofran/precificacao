@@ -2,433 +2,464 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SapatoFran Precificação</title>
-    <style>
-        :root {
-            --primary-color: #0056b3;
-            --secondary-color: #6c757d;
-            --success-color: #1a7e4b;
-            --danger-color: #c9302c;
-            --background-color: #f4f7f6;
-            --card-background: #ffffff;
-            --input-bg: #ffffff;
-            --header-bg: #34495e;
-            --header-text: #ffffff;
-            --input-border: #ced4da;
-            --highlight-input-bg: #fffbe6;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SapatoFran Precificação</title>
+  <style>
+    :root {
+      --primary-color: #0056b3;
+      --secondary-color: #6c757d;
+      --success-color: #1a7e4b;
+      --danger-color: #c9302c;
+      --background-color: #f4f7f6;
+      --card-background: #ffffff;
+      --input-bg: #ffffff;
+      --header-bg: #34495e;
+      --header-text: #ffffff;
+      --input-border: #ced4da;
+      --highlight-input-bg: #fffbe6;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background-color);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
 
-        .container {
-            max-width: 1400px;
-            margin: auto;
-        }
+    .container {
+      max-width: 1400px;
+      margin: auto;
+    }
 
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.2em;
-            font-weight: 600;
-        }
+    h1 {
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.2em;
+      font-weight: 600;
+    }
 
-        h2 {
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 8px;
-            margin-top: 40px;
-            color: #333;
-            font-size: 1.6em;
-            font-weight: 500;
-        }
+    h2 {
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 8px;
+      margin-top: 40px;
+      color: #333;
+      font-size: 1.6em;
+      font-weight: 500;
+    }
 
-        .card {
-            background-color: var(--card-background);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-            margin-bottom: 30px;
-        }
+    .card {
+      background-color: var(--card-background);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+      margin-bottom: 30px;
+    }
 
-        .pe-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
+    .pe-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
 
-        @media (max-width: 900px) {
-            .pe-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+    @media (max-width: 900px) {
+      .pe-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-        .pe-input-group {
-            display: flex;
-            flex-direction: column;
-        }
+    .pe-input-group {
+      display: flex;
+      flex-direction: column;
+    }
 
-        .pe-input-group label {
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--secondary-color);
-            font-size: 0.9em;
-        }
+    .pe-input-group label {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--secondary-color);
+      font-size: 0.9em;
+    }
 
-        .pe-input-group input {
-            padding: 12px;
-            border: 1px solid var(--input-border);
-            border-radius: 6px;
-            background-color: var(--input-bg);
-            transition: border-color 0.3s;
-        }
+    .pe-input-group input {
+      padding: 12px;
+      border: 1px solid var(--input-border);
+      border-radius: 6px;
+      background-color: var(--input-bg);
+      transition: border-color 0.3s;
+    }
 
-        .highlight-input input {
-            background-color: var(--highlight-input-bg);
-            border-color: #f7b731;
-        }
+    .highlight-input input {
+      background-color: var(--highlight-input-bg);
+      border-color: #f7b731;
+    }
 
-        .pe-input-group input:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
-        }
+    .pe-input-group input:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+    }
 
-        .pe-result-box {
-            text-align: center;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #ecf0f1;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
+    .pe-result-box {
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #ecf0f1;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
 
-        .pe-result-box strong {
-            font-size: 1em;
-            color: var(--secondary-color);
-            display: block;
-            margin-bottom: 5px;
-        }
+    .pe-result-box strong {
+      font-size: 1em;
+      color: var(--secondary-color);
+      display: block;
+      margin-bottom: 5px;
+    }
 
-        .pe-result-value {
-            font-size: 2em;
-            font-weight: 700;
-            color: var(--success-color);
-        }
+    .pe-result-value {
+      font-size: 2em;
+      font-weight: 700;
+      color: var(--success-color);
+    }
 
-        #peUnidades,
-        #peFaturamento {
-            color: var(--primary-color);
-        }
+    #peUnidades,
+    #peFaturamento {
+      color: var(--primary-color);
+    }
 
-        .pricing-table-container {
-            overflow-x: auto;
-        }
+    .pricing-table-container {
+      overflow-x: auto;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            min-width: 1200px;
-        }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 1300px;
+    }
 
-        thead th {
-            background-color: var(--header-bg);
-            color: var(--header-text);
-            padding: 12px 8px;
-            text-align: center;
-            font-size: 0.85em;
-            vertical-align: middle;
-            font-weight: 600;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    thead th {
+      background-color: var(--header-bg);
+      color: var(--header-text);
+      padding: 12px 8px;
+      text-align: center;
+      font-size: 0.85em;
+      vertical-align: middle;
+      font-weight: 600;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-        thead th:nth-child(n+2):nth-child(-n+7) {
-            background-color: #1abc9c;
-        }
+    thead th:nth-child(n+2):nth-child(-n+8) {
+      background-color: #1abc9c;
+    }
 
-        thead th:nth-child(n+8):nth-child(-n+9) {
-            background-color: #f39c12;
-        }
+    thead th:nth-child(n+9):nth-child(-n+10) {
+      background-color: #f39c12;
+    }
 
-        thead th:nth-child(n+10) {
-            background-color: var(--primary-color);
-        }
+    thead th:nth-child(n+11) {
+      background-color: var(--primary-color);
+    }
 
-        tbody td {
-            padding: 10px 8px;
-            border-bottom: 1px solid #ddd;
-            border-right: 1px solid #f4f4f4;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 0.9em;
-        }
+    tbody td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #f4f4f4;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 0.9em;
+    }
 
-        tbody tr:hover {
-            background-color: #e8f4fd;
-        }
+    tbody tr:hover {
+      background-color: #e8f4fd;
+    }
 
-        .input-cell input {
-            width: 90%;
-            padding: 8px 4px;
-            border: 1px solid var(--input-border);
-            border-radius: 4px;
-            text-align: center;
-            box-sizing: border-box;
-            background-color: var(--input-bg);
-        }
+    .input-cell input {
+      width: 90%;
+      padding: 8px 4px;
+      border: 1px solid var(--input-border);
+      border-radius: 4px;
+      text-align: center;
+      box-sizing: border-box;
+      background-color: var(--input-bg);
+    }
 
-        .result-cell {
-            font-weight: 600;
-            background-color: #f7f9fb;
-        }
+    .result-cell {
+      font-weight: 600;
+      background-color: #f7f9fb;
+    }
 
-        td:nth-child(10),
-        td:nth-child(11) {
-            font-size: 1em;
-            font-weight: 700;
-            color: var(--success-color);
-        }
+    td:nth-child(11),
+    td:nth-child(12) {
+      font-size: 1em;
+      font-weight: 700;
+      color: var(--success-color);
+    }
 
-        .result-cell.negative {
-            color: var(--danger-color) !important;
-            background-color: #fce7e7;
-        }
-    </style>
+    .result-cell.negative {
+      color: var(--danger-color) !important;
+      background-color: #fce7e7;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>📈 Ferramenta de Precificação Inteligente</h1>
+  <div class="container">
+    <h1>📈 Ferramenta de Precificação Inteligente</h1>
 
-        <h2 id="pe-section">Análise de Ponto de Equilíbrio (PE) Mensal</h2>
-        <div class="card">
-            <div class="pe-grid" style="margin-bottom: 20px;">
-                <div class="pe-input-group">
-                    <label for="custoFixoMensal">1. Custo Fixo (Ex: Aluguel, Salários - R$)</label>
-                    <input type="number" id="custoFixoMensal" value="10000" step="0.01" min="0">
-                </div>
-                <div class="pe-input-group">
-                    <label for="despesasOp">2. Despesas Operacionais (R$)</label>
-                    <input type="number" id="despesasOp" value="2000" step="0.01" min="0">
-                </div>
-                <div class="pe-input-group">
-                    <label for="despesasNaoOp">3. Despesas Não Operacionais (R$)</label>
-                    <input type="number" id="despesasNaoOp" value="500" step="0.01" min="0">
-                </div>
-                <div class="pe-result-box" style="background-color: #e8f4fd;">
-                    <strong>Custo Fixo Total (CFT)</strong>
-                    <span id="cft" class="pe-result-value">R$ 0,00</span>
-                </div>
-            </div>
-
-            <div class="pe-grid">
-                <div class="pe-input-group highlight-input">
-                    <label for="vlVendaMedioInput">Ticket Médio (Valor de Venda Médio - R$)</label>
-                    <input type="number" id="vlVendaMedioInput" value="105.17" step="0.01" min="0">
-                </div>
-                <div class="pe-input-group highlight-input">
-                    <label for="margemContribuicaoPercInput">Margem de Contribuição Média (%)</label>
-                    <input type="number" id="margemContribuicaoPercInput" value="19.18" step="0.01" min="0">
-                </div>
-
-                <div class="pe-result-box">
-                    <strong>Margem de Contribuição (R$)</strong>
-                    <span id="mcu" class="pe-result-value">R$ 0,00</span>
-                </div>
-                <div class="pe-result-box" style="background-color: #d4ede2;">
-                    <strong>Custo Variável Médio (R$)</strong>
-                    <span id="custoVariavelMedio" class="pe-result-value" style="color: var(--success-color);">R$ 0,00</span>
-                </div>
-            </div>
-
-            <div class="pe-grid" style="margin-top: 30px;">
-                <div class="pe-result-box">
-                    <strong>PE em Unidades (un.)</strong>
-                    <span id="peUnidades" class="pe-result-value">0</span>
-                </div>
-                <div class="pe-result-box">
-                    <strong>PE em Faturamento (R$)</strong>
-                    <span id="peFaturamento" class="pe-result-value">R$ 0,00</span>
-                </div>
-            </div>
+    <h2 id="pe-section">Análise de Ponto de Equilíbrio (PE) Mensal</h2>
+    <div class="card">
+      <div class="pe-grid" style="margin-bottom: 20px;">
+        <div class="pe-input-group">
+          <label for="custoFixoMensal">1. Custo Fixo (R$)</label>
+          <input type="number" id="custoFixoMensal" value="10000" step="0.01" min="0">
         </div>
-
-        <h2 id="pricing-section">Detalhamento de Margem Unitária por Canal</h2>
-        <div class="card pricing-table-container">
-            <table id="pricingTable">
-                <thead>
-                    <tr>
-                        <th rowspan="2">Marketplace</th>
-                        <th colspan="6">INPUTS</th>
-                        <th colspan="2">CÁLCULOS</th>
-                        <th colspan="3">P.E. UNITÁRIO</th>
-                    </tr>
-                    <tr>
-                        <th>Valor de Venda (R$)</th>
-                        <th>Custo Prod. (R$)</th>
-                        <th>Frete (R$)</th>
-                        <th>Taxa Mkt (%)</th>
-                        <th>Imposto (%)</th>
-                        <th>Promoção (%)</th>
-                        <th>Taxas Var. (%)</th>
-                        <th>Custo Fixo Unit.</th>
-                        <th>Custo Total Unit.</th>
-                        <th>Lucro Líq.</th>
-                        <th>Margem Líq. (%)</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <div class="pe-input-group">
+          <label for="despesasOp">2. Despesas Operacionais (R$)</label>
+          <input type="number" id="despesasOp" value="2000" step="0.01" min="0">
         </div>
+        <div class="pe-input-group">
+          <label for="despesasNaoOp">3. Despesas Não Operacionais (R$)</label>
+          <input type="number" id="despesasNaoOp" value="500" step="0.01" min="0">
+        </div>
+        <div class="pe-result-box" style="background-color: #e8f4fd;">
+          <strong>Custo Fixo Total (CFT)</strong>
+          <span id="cft" class="pe-result-value">R$ 0,00</span>
+        </div>
+      </div>
+
+      <div class="pe-grid">
+        <div class="pe-input-group highlight-input">
+          <label for="vlVendaMedioInput">Ticket Médio (R$)</label>
+          <input type="number" id="vlVendaMedioInput" value="105.17" step="0.01" min="0">
+        </div>
+        <div class="pe-input-group highlight-input">
+          <label for="margemContribuicaoPercInput">Margem de Contribuição Média (%)</label>
+          <input type="number" id="margemContribuicaoPercInput" value="19.18" step="0.01" min="0">
+        </div>
+        <div class="pe-result-box">
+          <strong>Margem de Contribuição (R$)</strong>
+          <span id="mcu" class="pe-result-value">R$ 0,00</span>
+        </div>
+        <div class="pe-result-box" style="background-color: #d4ede2;">
+          <strong>Custo Variável Médio (R$)</strong>
+          <span id="custoVariavelMedio" class="pe-result-value" style="color: var(--success-color);">R$ 0,00</span>
+        </div>
+      </div>
+
+      <div class="pe-grid" style="margin-top: 30px;">
+        <div class="pe-result-box">
+          <strong>PE em Unidades</strong>
+          <span id="peUnidades" class="pe-result-value">0</span>
+        </div>
+        <div class="pe-result-box">
+          <strong>PE em Faturamento</strong>
+          <span id="peFaturamento" class="pe-result-value">R$ 0,00</span>
+        </div>
+      </div>
     </div>
 
-    <script>
-    const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
+    <h2 id="pricing-section">Detalhamento de Margem Unitária por Canal</h2>
+    <div class="card pricing-table-container">
+      <table id="pricingTable">
+        <thead>
+          <tr>
+            <th rowspan="2">Marketplace</th>
+            <th colspan="7">INPUTS</th>
+            <th colspan="2">CÁLCULOS</th>
+            <th colspan="3">P.E. UNITÁRIO</th>
+          </tr>
+          <tr>
+            <th>Valor de Venda (R$)</th>
+            <th>Custo Prod. (R$)</th>
+            <th>Frete (R$)</th>
+            <th>Taxa Mkt (%)</th>
+            <th>Imposto (%)</th>
+            <th>Promoção (%)</th>
+            <th>Comissão Afiliado (%)</th>
+            <th>Taxas Var. (%)</th>
+            <th>Custo Fixo Unit.</th>
+            <th>Custo Total Unit.</th>
+            <th>Lucro Líq.</th>
+            <th>Margem Líq. (%)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
     const percFormatter = new Intl.NumberFormat('pt-BR', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     let marketplaceData = [
-        { id: 'netshoes', name: 'NETSHOES', vlVenda: 130.00, custoProduto: 60.00, frete: 0.00, taxaMkt: 0.25, imposto: 0.10, promocao: 0.10 },
-        { id: 'magalu', name: 'MAGALU', vlVenda: 160.00, custoProduto: 69.00, frete: 0.00, taxaMkt: 0.20, imposto: 0.10, promocao: 0.15 },
-        { id: 'meli', name: 'MELI', vlVenda: 78.00, custoProduto: 42.00, frete: 0.00, taxaMkt: 0.14, imposto: 0.05, promocao: 0.00 },
-        { id: 'meli_fg', name: 'MELI FRETE GRÁTIS', vlVenda: 112.00, custoProduto: 50.00, frete: 22.50, taxaMkt: 0.14, imposto: 0.05, promocao: 0.00 },
-        { id: 'shein', name: 'SHEIN', vlVenda: 58.00, custoProduto: 40.00, frete: 0.00, taxaMkt: 0.16, imposto: 0.05, promocao: 0.00 },
-        { id: 'shopee', name: 'SHOPEE', vlVenda: 31.00, custoProduto: 40.00, frete: 0.00, taxaMkt: 0.20, imposto: 0.00, promocao: 0.00 }
+      { id: 'netshoes', name: 'NETSHOES', vlVenda: 130.00, custoProduto: 60.00, frete: 0.00, taxaMkt: 0.25, imposto: 0.10, promocao: 0.10, comissaoAfiliado: 0.00 },
+      { id: 'magalu', name: 'MAGALU', vlVenda: 160.00, custoProduto: 69.00, frete: 0.00, taxaMkt: 0.20, imposto: 0.10, promocao: 0.15, comissaoAfiliado: 0.00 },
+      { id: 'meli', name: 'MELI', vlVenda: 78.00, custoProduto: 42.00, frete: 0.00, taxaMkt: 0.14, imposto: 0.05, promocao: 0.00, comissaoAfiliado: 0.00 },
+      { id: 'meli_fg', name: 'MELI FRETE GRÁTIS', vlVenda: 112.00, custoProduto: 50.00, frete: 22.50, taxaMkt: 0.14, imposto: 0.05, promocao: 0.00, comissaoAfiliado: 0.00 },
+      { id: 'shein', name: 'SHEIN', vlVenda: 58.00, custoProduto: 40.00, frete: 0.00, taxaMkt: 0.16, imposto: 0.05, promocao: 0.00, comissaoAfiliado: 0.00 },
+      { id: 'shopee', name: 'SHOPEE', vlVenda: 31.00, custoProduto: 40.00, frete: 0.00, taxaMkt: 0.20, imposto: 0.00, promocao: 0.00, comissaoAfiliado: 0.00 },
+      { id: 'tiktok', name: 'TIKTOK', vlVenda: 95.00, custoProduto: 45.00, frete: 0.00, taxaMkt: 0.12, imposto: 0.05, promocao: 0.05, comissaoAfiliado: 0.10 }
     ];
 
     const peInputs = {
-        custoFixoMensal: document.getElementById('custoFixoMensal'),
-        despesasOp: document.getElementById('despesasOp'),
-        despesasNaoOp: document.getElementById('despesasNaoOp'),
-        vlVendaMedioInput: document.getElementById('vlVendaMedioInput'),
-        margemContribuicaoPercInput: document.getElementById('margemContribuicaoPercInput'),
+      custoFixoMensal: document.getElementById('custoFixoMensal'),
+      despesasOp: document.getElementById('despesasOp'),
+      despesasNaoOp: document.getElementById('despesasNaoOp'),
+      vlVendaMedioInput: document.getElementById('vlVendaMedioInput'),
+      margemContribuicaoPercInput: document.getElementById('margemContribuicaoPercInput'),
     };
 
     function calculatePricing(data) {
-        const { vlVenda, custoProduto, frete, taxaMkt, imposto, promocao } = data;
-        const taxasVariaveisPerc = taxaMkt + imposto + promocao;
-        const custoFixoUnitario = vlVenda * taxasVariaveisPerc;
-        const custoTotalUnitario = custoProduto + frete + custoFixoUnitario;
-        const lucroLiquido = vlVenda - custoTotalUnitario;
-        const margemLiquida = vlVenda > 0 ? lucroLiquido / vlVenda : 0;
-        return { taxasVariaveisPerc, custoFixoUnitario, custoTotalUnitario, lucroLiquido, margemLiquida };
+      const { vlVenda = 0, custoProduto = 0, frete = 0, taxaMkt = 0, imposto = 0, promocao = 0, comissaoAfiliado = 0 } = data;
+      const taxasVariaveisPerc = (taxaMkt || 0) + (imposto || 0) + (promocao || 0) + (comissaoAfiliado || 0);
+      const custoFixoUnitario = vlVenda * taxasVariaveisPerc;
+      const custoTotalUnitario = custoProduto + frete + custoFixoUnitario;
+      const lucroLiquido = vlVenda - custoTotalUnitario;
+      const margemLiquida = vlVenda > 0 ? lucroLiquido / vlVenda : 0;
+      return { taxasVariaveisPerc, custoFixoUnitario, custoTotalUnitario, lucroLiquido, margemLiquida };
     }
 
     function calculatePE() {
-        const cft = (parseFloat(peInputs.custoFixoMensal.value) || 0)
-            + (parseFloat(peInputs.despesasOp.value) || 0)
-            + (parseFloat(peInputs.despesasNaoOp.value) || 0);
+      const cft = (parseFloat(peInputs.custoFixoMensal.value) || 0)
+        + (parseFloat(peInputs.despesasOp.value) || 0)
+        + (parseFloat(peInputs.despesasNaoOp.value) || 0);
 
-        const vlVendaMedio = parseFloat(peInputs.vlVendaMedioInput.value) || 0;
-        const margemContribuicaoPerc = (parseFloat(peInputs.margemContribuicaoPercInput.value) || 0) / 100;
-        const mcu = vlVendaMedio * margemContribuicaoPerc;
-        const custoVariavelMedio = vlVendaMedio - mcu;
-        const peUnidades = mcu > 0 ? cft / mcu : 0;
-        const peFaturamento = margemContribuicaoPerc > 0 ? cft / margemContribuicaoPerc : 0;
+      const vlVendaMedio = parseFloat(peInputs.vlVendaMedioInput.value) || 0;
+      const margemContribuicaoPerc = (parseFloat(peInputs.margemContribuicaoPercInput.value) || 0) / 100;
+      const mcu = vlVendaMedio * margemContribuicaoPerc;
+      const custoVariavelMedio = vlVendaMedio - mcu;
+      const peUnidades = mcu > 0 ? cft / mcu : 0;
+      const peFaturamento = margemContribuicaoPerc > 0 ? cft / margemContribuicaoPerc : 0;
 
-        document.getElementById('cft').textContent = formatter.format(cft);
-        document.getElementById('mcu').textContent = formatter.format(mcu);
-        document.getElementById('custoVariavelMedio').textContent = formatter.format(custoVariavelMedio);
-        document.getElementById('peUnidades').textContent = Math.ceil(peUnidades);
-        document.getElementById('peFaturamento').textContent = formatter.format(peFaturamento);
+      document.getElementById('cft').textContent = formatter.format(cft);
+      document.getElementById('mcu').textContent = formatter.format(mcu);
+      document.getElementById('custoVariavelMedio').textContent = formatter.format(custoVariavelMedio);
+      document.getElementById('peUnidades').textContent = Math.ceil(peUnidades);
+      document.getElementById('peFaturamento').textContent = formatter.format(peFaturamento);
     }
 
-    function renderPricingTable() {
-        const tbody = document.getElementById('pricingTable').querySelector('tbody');
-        tbody.innerHTML = '';
+    // Build table once. After that we update only result cells to avoid rebuilding inputs.
+    function renderPricingTableOnce() {
+      const tbody = document.getElementById('pricingTable').querySelector('tbody');
+      tbody.innerHTML = '';
 
-        marketplaceData.forEach(data => {
-            const calc = calculatePricing(data);
-            Object.assign(data, calc);
+      marketplaceData.forEach(data => {
+        // ensure calculated fields exist initially
+        Object.assign(data, calculatePricing(data));
 
-            const tr = document.createElement('tr');
-            tr.setAttribute('data-id', data.id);
-            tr.innerHTML = `
-                <td style="font-weight: 600; text-align: left; padding-left: 15px;">${data.name}</td>
-                ${createInputCell(data.id, 'vlVenda', data.vlVenda)}
-                ${createInputCell(data.id, 'custoProduto', data.custoProduto)}
-                ${createInputCell(data.id, 'frete', data.frete)}
-                ${createInputCell(data.id, 'taxaMkt', data.taxaMkt, true)}
-                ${createInputCell(data.id, 'imposto', data.imposto, true)}
-                ${createInputCell(data.id, 'promocao', data.promocao, true)}
-                <td class="result-cell taxas">${percFormatter.format(data.taxasVariaveisPerc)}</td>
-                <td class="result-cell cf">${formatter.format(data.custoFixoUnitario)}</td>
-                <td class="result-cell ct">${formatter.format(data.custoTotalUnitario)}</td>
-                <td class="result-cell lucro ${data.lucroLiquido < 0 ? 'negative' : ''}">${formatter.format(data.lucroLiquido)}</td>
-                <td class="result-cell margem ${data.margemLiquida < 0 ? 'negative' : ''}">${percFormatter.format(data.margemLiquida)}</td>
-            `;
-            tbody.appendChild(tr);
-        });
+        const tr = document.createElement('tr');
+        tr.setAttribute('data-id', data.id);
+        tr.innerHTML = `
+          <td style="font-weight: 600; text-align: left; padding-left: 15px;">${data.name}</td>
+          ${createInputCell(data.id, 'vlVenda', data.vlVenda)}
+          ${createInputCell(data.id, 'custoProduto', data.custoProduto)}
+          ${createInputCell(data.id, 'frete', data.frete)}
+          ${createInputCell(data.id, 'taxaMkt', data.taxaMkt, true)}
+          ${createInputCell(data.id, 'imposto', data.imposto, true)}
+          ${createInputCell(data.id, 'promocao', data.promocao, true)}
+          ${createInputCell(data.id, 'comissaoAfiliado', data.comissaoAfiliado || 0, true)}
+          <td class="result-cell taxas"></td>
+          <td class="result-cell cf"></td>
+          <td class="result-cell ct"></td>
+          <td class="result-cell lucro"></td>
+          <td class="result-cell margem"></td>
+        `;
+        tbody.appendChild(tr);
+      });
 
-        attachInputListeners();
+      // fill initial results
+      marketplaceData.forEach(item => updateRowUI(item));
+      attachInputListeners();
     }
 
     function createInputCell(id, key, value, isPercentage = false) {
-        const displayedValue = isPercentage ? (value * 100).toFixed(2) : value.toFixed(2);
-        return `
-            <td class="input-cell">
-                <input 
-                    type="number" 
-                    data-id="${id}" 
-                    data-key="${key}" 
-                    value="${displayedValue}" 
-                    step="0.01"
-                    min="0"
-                >
-            </td>
-        `;
+      // Use type="text" to avoid browser numeric reformatting that moves cursor.
+      const displayed = (typeof value === 'number' && !isNaN(value))
+        ? (isPercentage ? (value * 100).toFixed(2) : value.toFixed(2))
+        : '';
+      const safe = String(displayed).replace(/"/g, '&quot;');
+      return `
+        <td class="input-cell">
+          <input
+            type="text"
+            data-id="${id}"
+            data-key="${key}"
+            value="${safe}"
+            class="tbl-input"
+            inputmode="decimal"
+          >
+        </td>
+      `;
+    }
+
+    // Update only the result cells for a single item (no inputs recreated)
+    function updateRowUI(item) {
+      const calc = calculatePricing(item);
+      Object.assign(item, calc);
+
+      const tr = document.querySelector(`tr[data-id="${item.id}"]`);
+      if (!tr) return;
+
+      const taxasTd = tr.querySelector('.taxas');
+      const cfTd = tr.querySelector('.cf');
+      const ctTd = tr.querySelector('.ct');
+      const lucroTd = tr.querySelector('.lucro');
+      const margemTd = tr.querySelector('.margem');
+
+      taxasTd.textContent = percFormatter.format(item.taxasVariaveisPerc);
+      cfTd.textContent = formatter.format(item.custoFixoUnitario);
+      ctTd.textContent = formatter.format(item.custoTotalUnitario);
+      lucroTd.textContent = formatter.format(item.lucroLiquido);
+      margemTd.textContent = percFormatter.format(item.margemLiquida);
+
+      // negative styling
+      lucroTd.classList.toggle('negative', item.lucroLiquido < 0);
+      margemTd.classList.toggle('negative', item.margemLiquida < 0);
     }
 
     function attachInputListeners() {
-        document.querySelectorAll('#pricingTable input').forEach(input => {
-            input.addEventListener('input', (e) => {
-                const id = e.target.dataset.id;
-                const key = e.target.dataset.key;
-                let newValue = parseFloat(e.target.value) || 0;
+      document.querySelectorAll('#pricingTable input.tbl-input').forEach(input => {
+        // remove any previous handler (idempotent)
+        input.oninput = (e) => {
+          const id = e.target.dataset.id;
+          const key = e.target.dataset.key;
+          const raw = e.target.value; // keep raw as user types
 
-                if (key.includes('taxaMkt') || key.includes('imposto') || key.includes('promocao'))
-                    newValue = newValue / 100;
+          // parse numeric (accept comma)
+          let numeric = parseFloat(String(raw).replace(',', '.'));
+          if (isNaN(numeric)) numeric = 0;
 
-                const item = marketplaceData.find(m => m.id === id);
-                if (item) {
-                    item[key] = newValue;
-                    const calc = calculatePricing(item);
-                    Object.assign(item, calc);
+          // if percentage field, convert to decimal for storage
+          if (['taxaMkt', 'imposto', 'promocao', 'comissaoAfiliado'].includes(key)) {
+            // user types "12.34" meaning 12.34%
+            marketplaceData.find(m => m.id === id)[key] = numeric / 100;
+          } else {
+            marketplaceData.find(m => m.id === id)[key] = numeric;
+          }
 
-                    // Atualiza só as células da linha
-                    const row = document.querySelector(`tr[data-id="${id}"]`);
-                    if (row) {
-                        row.querySelector('.taxas').textContent = percFormatter.format(calc.taxasVariaveisPerc);
-                        row.querySelector('.cf').textContent = formatter.format(calc.custoFixoUnitario);
-                        row.querySelector('.ct').textContent = formatter.format(calc.custoTotalUnitario);
-                        const lucroCell = row.querySelector('.lucro');
-                        const margemCell = row.querySelector('.margem');
+          // update only this row results (no re-render of inputs)
+          const item = marketplaceData.find(m => m.id === id);
+          if (item) updateRowUI(item);
 
-                        lucroCell.textContent = formatter.format(calc.lucroLiquido);
-                        margemCell.textContent = percFormatter.format(calc.margemLiquida);
-
-                        lucroCell.classList.toggle('negative', calc.lucroLiquido < 0);
-                        margemCell.classList.toggle('negative', calc.margemLiquida < 0);
-                    }
-                    calculatePE();
-                }
-            });
-        });
-
-        Object.values(peInputs).forEach(input => input.addEventListener('input', calculatePE));
+          // update PE (doesn't affect table result cells, but keep in sync)
+          calculatePE();
+        };
+      });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        renderPricingTable();
-        calculatePE();
+    // PE inputs: recalc PE on change
+    Object.values(peInputs).forEach(input => {
+      if (input) input.oninput = calculatePE;
     });
-</script>
 
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPricingTableOnce();
+      calculatePE();
+    });
+  </script>
 </body>
+
 </html>
